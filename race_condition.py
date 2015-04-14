@@ -1,6 +1,6 @@
 import sys
 import os.path
-from subprocess import Popen, PIPE, call
+from subprocess import Popen, PIPE
 
 DEFAULT_RUNS = 50
 arg_length = len (sys.argv)
