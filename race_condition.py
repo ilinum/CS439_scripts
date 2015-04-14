@@ -13,12 +13,12 @@ if (arg_length < 2 or arg_length > 3):
 test_name = sys.argv[1]
 #now try to guess if it's userprog or vm
 if (os.path.isfile('../../tests/vm/' + test_name + '.ck')):
-	path_to_test = "tests/vm/" + test_name + ".result"
+	path_to_test = "tests/vm/" + test_name
 else:
 	if not os.path.isfile('../../tests/userprog/' + test_name + '.ck'):
 		print "test not found"
 		exit(0)
-	path_to_test = "tests/userprog/" + test_name + ".result"
+	path_to_test = "tests/userprog/" + test_name
 
 if (arg_length == 3):
 	tests_to_run = sys.argv[2]
@@ -39,12 +39,16 @@ output = open("race_condition_" + test_name + ".txt", 'w', 0)
 output.write("Test: " + test_name + "\nRuns: " + str(tests_to_run) + "\n")
 
 for i in range(int(tests_to_run)):
+	try:
+		os.remove(path_to_test + ".result")
+		os.remove(path_to_test + ".output")
+	except:
+		pass
 	print "Test number " + str(i + 1)
-	run_command (['make', 'clean'])
-	test_out = run_command (["make", path_to_test])
+	test_out = run_command (["make", path_to_test + ".result"])
 	# done testing
-	passed = run_command (["grep", "-c", "PASS", path_to_test])
-	res_file = open (path_to_test)
+	passed = run_command (["grep", "-c", "PASS", path_to_test + ".result"])
+	res_file = open (path_to_test + ".result")
 	# did i pass?
 	if (int(passed)) > 0:
 		tests_passed += 1
@@ -60,7 +64,7 @@ for i in range(int(tests_to_run)):
 
 results = "Tests passed: " + str(tests_passed) + "\n"
 results += "Tests failed: " + str(tests_failed) + "\n"
-results += "Failed: " + float(failed)/tests_to_run + "%\n"
+results += "Failed: " + str(float(tests_failed)/tests_to_run) + "%\n"
 print results
 output.write(results)
 output.close()
