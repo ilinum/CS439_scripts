@@ -62,9 +62,9 @@ for i in range(int(tests_to_run)):
 		print '\n' + "".join(res[1:]) + "\n"
 		output.write("".join(res) + "\n")
 
-results = "Tests passed: " + str(tests_passed) + "\n"
+results = "\nTests passed: " + str(tests_passed) + "\n"
 results += "Tests failed: " + str(tests_failed) + "\n"
-results += "Failed: " + str(float(tests_failed)/tests_to_run) + "%\n"
+results += "Failed: " + str((tests_failed * 100.0)/float(tests_to_run)) + "%\n"
 print results
 output.write(results)
 output.close()
