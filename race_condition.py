@@ -41,9 +41,13 @@ output.write("Test: " + test_name + "\nRuns: " + str(tests_to_run) + "\n")
 for i in range(int(tests_to_run)):
 	try:
 		os.remove(path_to_test + ".result")
-		os.remove(path_to_test + ".output")
 	except:
 		pass
+	try:
+		os.remove(path_to_test + ".output")	
+	except:
+		pass
+
 	print "Test number " + str(i + 1)
 	test_out = run_command (["make", path_to_test + ".result"])
 	# done testing
