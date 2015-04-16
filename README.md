@@ -1,11 +1,10 @@
 # CS439_scripts
-Scripts written for CS 439 (Operating Systems) class
+Scripts written for CS 439 (Operating Systems) class for testing Pintos Operating System for Project 3 (VM)
 
 ##Race Condition
-Currently the only script done.
-It runs a particular tests a lot of times in order to find a race condition
+Runs a particular tests a lot of times in order to find a race condition
 
-###How to use
+###How to use:
 * Copy the file into src/vm/build directory
 * Run python race_condition.py [name_of_test] [num_runs]
 * If num_runs is not specified, it runs the test 50 times
@@ -20,3 +19,22 @@ It runs a particular tests a lot of times in order to find a race condition
 * Implement error checking for shell commands
 * Allow user to select the name of output file
 * Allow quiet execution (with no output to console)
+
+
+##All Race Condition
+Runs race_condition.py on all tests in test_names.txt
+test_names.txt contains all tests for Project 3 (Virtual Memory) except for the extra credit tests
+
+###How to use:
+* Copy all files from this repo into src/vm/build directory
+* Run python run_all_race_condition.py
+* Script takes a while to run, so best to use tmux:
+  * ssh onto a lab machine
+  * Run tmux
+  * Run python run_all_race_condition.py > output_file.txt &
+  * Close the window
+  * In a few hours ssh onto a lab machine and run tmux attach
+
+###TODO:
+* Allow specifying number of runs for each tests (current default is 50)
+* Run in tmux by default
